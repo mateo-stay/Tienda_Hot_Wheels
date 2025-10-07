@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚗</text></svg>">
+  <title>Administrador - Hot Wheels Store</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/script.js" defer></script>
+
+</head>
+<body>
+  <div class="admin-container">
+    <aside class="sidebar">
+      <h2>Administrador</h2>
+      <ul>
+        <li><a href="index.html">Volver a la tienda</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#usuarios">Usuarios</a></li>
+      </ul>
+    </aside>
+    <div class="admin-content">
+      <section id="productos">
+        <form id="formProducto">
+          <h3>Nuevo Producto</h3>
+          <label for="codigo">Código Producto:</label>
+          <input type="text" id="codigo" required minlength="3">
+
+          <label for="nombreProducto">Nombre:</label>
+          <input type="text" id="nombreProducto" required maxlength="100">
+
+          <label for="descripcion">Descripción:</label>
+          <textarea id="descripcion" maxlength="500"></textarea>
+
+          <label for="precio">Precio:</label>
+          <input type="number" id="precio" required min="0" step="0.01">
+
+          <label for="stock">Stock:</label>
+          <input type="number" id="stock" required min="0">
+
+          <label for="stockCritico">Stock Crítico:</label>
+          <input type="number" id="stockCritico" min="0">
+
+          <label for="categoria">Categoría:</label>
+          <select id="categoria" required>
+            <option value="">Seleccione...</option>
+            <option value="autos">Autos</option>
+            <option value="camionetas">Camionetas</option>
+            <option value="motos">Motos</option>
+          </select>
+
+          <label for="imagen">Imagen:</label>
+          <input type="file" id="imagen">
+
+          <button type="submit">Guardar Producto</button>
+        </form>
+
+        <h3>Listado de Productos</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Categoría</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="tablaProductos"></tbody>
+        </table>
+      </section>
+
+      <section id="usuarios">
+        <form id="formUsuario">
+          <h3>Nuevo Usuario</h3>
+          <label for="run">RUN:</label>
+          <input type="text" id="run" required minlength="7" maxlength="9" placeholder="19011022K">
+
+          <label for="nombreU">Nombre:</label>
+          <input type="text" id="nombreU" required maxlength="50">
+
+          <label for="apellidoU">Apellidos:</label>
+          <input type="text" id="apellidoU" required maxlength="100">
+
+          <label for="correoU">Correo:</label>
+          <input type="email" id="correoU" required maxlength="100">
+
+          <label for="fechaNac">Fecha de Nacimiento:</label>
+          <input type="date" id="fechaNac">
+
+          <label for="tipoUsuario">Tipo de Usuario:</label>
+          <select id="tipoUsuario" required>
+            <option value="">Seleccione...</option>
+            <option value="admin">Administrador</option>
+            <option value="cliente">Cliente</option>
+            <option value="vendedor">Vendedor</option>
+          </select>
+
+          <label for="region">Región:</label>
+          <select id="region" required></select>
+
+          <label for="comuna">Comuna:</label>
+          <select id="comuna" required></select>
+
+          <label for="direccion">Dirección:</label>
+          <input type="text" id="direccion" required maxlength="300">
+
+          <button type="submit">Guardar Usuario</button>
+        </form>
+
+        <h3>Listado de Usuarios</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>RUN</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Tipo</th>
+              <th>Región/Comuna</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="tablaUsuarios"></tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
