@@ -1,13 +1,17 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './App.scss'
+
+import Producto from './pages/Producto';
+import Carrito from './pages/Carrito';
+import Registro from './pages/Registro';
+import Login from './pages/Login';
+import Nosotros from './pages/Nosotros';
+import Blogs from './pages/Blogs';
+import Contacto from './pages/Contacto';
+
+import Layout from './layouts/Layout';
+
 import React, { useState } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import Producto from './components/Producto';
-import Carrito from './components/Carrito';
-import Registro from './components/Registro';
-import Login from './components/Login';
-import Nosotros from './components/Nosotros';
-import Blogs from './components/Blogs';
-import Contacto from './components/Contacto';
-import './index.css';
 
 function App() {
   const productos = [
@@ -32,7 +36,6 @@ function App() {
       <section id="bienvenida">
         <h2>Bienvenido a la Tienda Oficial Hot Wheels</h2>
       </section>
-
       <section id="productos">
         <h2>Modelos Destacados</h2>
         <div className="productos-container">
@@ -50,40 +53,24 @@ function App() {
     </main>
   );
 
-  const CarritoPage = () => <Carrito carrito={carrito} setCarrito={setCarrito} />;
+  const CarritoPage = () => (
+    <Carrito carrito={carrito} setCarrito={setCarrito} />
+  );
 
   return (
-    <div>
-      <header>
-        <h1>Hot Wheels Store</h1>
-        <nav>
-          <ul>
-            <li><Link to="/">Inicio</Link></li>
-            <li><Link to="/">Productos</Link></li>
-            <li><Link to="/registro">Registro</Link></li>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/nosotros">Nosotros</Link></li>
-            <li><Link to="/blogs">Blogs</Link></li>
-            <li><Link to="/contacto">Contacto</Link></li>
-            <li><Link to="/carrito">Carrito ({carrito.length})</Link></li>
-          </ul>
-        </nav>
-      </header>
-
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Inicio />} />
-        <Route path="/registro" element={<Registro />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/nosotros" element={<Nosotros />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/contacto" element={<Contacto />} />
-        <Route path="/carrito" element={<CarritoPage />} />
+        <Route element={<Layout carrito={carrito} />}>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/registro" element={<Registro />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/nosotros" element={<Nosotros />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="/carrito" element={<CarritoPage />} />
+        </Route>
       </Routes>
-
-      <footer>
-        <p>&copy; 2025 Hot Wheels Store - Proyecto DuocUC</p>
-      </footer>
-    </div>
+    </BrowserRouter>
   );
 }
 
