@@ -1,13 +1,11 @@
 import React from 'react';
 
 function Carrito({ carrito, setCarrito }) {
-  // Función para eliminar un producto por índice
   const eliminarProducto = (index) => {
     const nuevoCarrito = carrito.filter((_, i) => i !== index);
     setCarrito(nuevoCarrito);
   };
 
-  // Calcular total
   const total = carrito.reduce((sum, item) => sum + item.precio, 0);
 
   return (

@@ -19,7 +19,6 @@ function Layout({ carrito }) {
         </nav>
       </header>
 
-      {/* Aquí se renderizan las páginas hijas */}
       <Outlet />
 
       <footer>

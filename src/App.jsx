@@ -1,6 +1,8 @@
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.scss'
+import './App.scss';
 
+// Páginas
 import Producto from './pages/Producto';
 import Carrito from './pages/Carrito';
 import Registro from './pages/Registro';
@@ -9,9 +11,8 @@ import Nosotros from './pages/Nosotros';
 import Blogs from './pages/Blogs';
 import Contacto from './pages/Contacto';
 
+// Layout
 import Layout from './layouts/Layout';
-
-import React, { useState } from 'react';
 
 function App() {
   const productos = [
@@ -28,7 +29,7 @@ function App() {
   const [carrito, setCarrito] = useState([]);
 
   const agregarAlCarrito = (nombre, precio) => {
-    setCarrito([...carrito, { nombre, precio }]);
+    setCarrito([...carrito, { id: Date.now(), nombre, precio }]);
   };
 
   const Inicio = () => (
@@ -39,9 +40,9 @@ function App() {
       <section id="productos">
         <h2>Modelos Destacados</h2>
         <div className="productos-container">
-          {productos.map((p, i) => (
+          {productos.map((p) => (
             <Producto
-              key={i}
+              key={p.nombre}
               nombre={p.nombre}
               imagen={p.imagen}
               precio={p.precio}
