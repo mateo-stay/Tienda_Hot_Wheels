@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.scss';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Páginas
 import Producto from './pages/Producto';
@@ -26,16 +28,36 @@ function App() {
     { nombre: "Mazda 787B", imagen: "/img/mazda_787b.jpg", precio: 7000 },
   ];
 
-  const [carrito, setCarrito] = useState([]);
+  // 🛒 Carrito persistente
+  const [carrito, setCarrito] = useState(() => {
+    return JSON.parse(localStorage.getItem('carrito')) || [];
+  });
+
+  // 🌟 Usuario logueado persistente
+  const [usuario, setUsuario] = useState(() => {
+    return JSON.parse(localStorage.getItem('usuario')) || null;
+  });
+
+  // Sincronizar carrito con localStorage
+  useEffect(() => {
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+  }, [carrito]);
+
+  // Sincronizar usuario con localStorage
+  useEffect(() => {
+    localStorage.setItem('usuario', JSON.stringify(usuario));
+  }, [usuario]);
 
   const agregarAlCarrito = (nombre, precio) => {
     setCarrito([...carrito, { id: Date.now(), nombre, precio }]);
+    toast.success(`✅ ${nombre} agregado al carrito`);
   };
 
   const Inicio = () => (
     <main>
       <section id="bienvenida">
         <h2>Bienvenido a la Tienda Oficial Hot Wheels</h2>
+        {usuario && <p>🌟 Hola, {usuario.nombre}</p>}
       </section>
       <section id="productos">
         <h2>Modelos Destacados</h2>
@@ -54,25 +76,30 @@ function App() {
     </main>
   );
 
-  const CarritoPage = () => (
-    <Carrito carrito={carrito} setCarrito={setCarrito} />
-  );
+  const CarritoPage = () => <Carrito carrito={carrito} setCarrito={setCarrito} />;
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout carrito={carrito} />}>
+        <Route
+          element={<Layout carrito={carrito} usuario={usuario} setUsuario={setUsuario} />}
+        >
           <Route path="/" element={<Inicio />} />
           <Route path="/registro" element={<Registro />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setUsuario={setUsuario} />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/carrito" element={<CarritoPage />} />
         </Route>
       </Routes>
+
+      {/* Contenedor global de toasts */}
+      <ToastContainer position="top-center" autoClose={2000} />
     </BrowserRouter>
   );
 }
 
 export default App;
+
+

@@ -1,30 +1,72 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
 function Carrito({ carrito, setCarrito }) {
-  const eliminarProducto = (index) => {
-    const nuevoCarrito = carrito.filter((_, i) => i !== index);
+
+  // 🧮 Calcular el total
+  const total = carrito.reduce((acc, item) => acc + item.precio, 0);
+
+  // ❌ Eliminar un producto del carrito
+  const eliminarDelCarrito = (id) => {
+    const nuevoCarrito = carrito.filter((item) => item.id !== id);
     setCarrito(nuevoCarrito);
+    toast.info('🗑️ Producto eliminado del carrito');
   };
 
-  const total = carrito.reduce((sum, item) => sum + item.precio, 0);
+  // 🛍️ Simular compra
+  const comprar = () => {
+    if (carrito.length === 0) {
+      toast.warn('⚠️ Tu carrito está vacío');
+      return;
+    }
+
+    setCarrito([]); // Vacía el carrito
+    toast.success('🏁 ¡Compra realizada con éxito! Gracias por tu compra 😎');
+  };
 
   return (
-    <main>
-      <h2>Carrito de Compras</h2>
+    <main className="carrito-page">
+      <h2>🛒 Tu Carrito</h2>
 
       {carrito.length === 0 ? (
-        <p>El carrito está vacío.</p>
+        <p className="vacio">Tu carrito está vacío.</p>
       ) : (
-        <div id="listaCarrito">
-          {carrito.map((item, i) => (
-            <div key={i} className="item-carrito">
-              <span>{item.nombre}</span>
-              <span>${item.precio}</span>
-              <button onClick={() => eliminarProducto(i)}>Eliminar</button>
-            </div>
-          ))}
-          <p id="totalCarrito">Total: ${total}</p>
-        </div>
+        <>
+          <div className="lista-carrito">
+            {carrito.map((item) => (
+              <div key={item.id} className="item-carrito">
+                <span>{item.nombre}</span>
+                <span>
+                  {new Intl.NumberFormat('es-CL', {
+                    style: 'currency',
+                    currency: 'CLP',
+                    minimumFractionDigits: 0,
+                  }).format(item.precio)}
+                </span>
+                <button
+                  className="eliminar-btn"
+                  onClick={() => eliminarDelCarrito(item.id)}
+                >
+                  Eliminar
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="resumen">
+            <h3>
+              Total:{' '}
+              {new Intl.NumberFormat('es-CL', {
+                style: 'currency',
+                currency: 'CLP',
+                minimumFractionDigits: 0,
+              }).format(total)}
+            </h3>
+            <button className="comprar-btn" onClick={comprar}>
+              Comprar
+            </button>
+          </div>
+        </>
       )}
     </main>
   );
