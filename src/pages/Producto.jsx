@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Producto({ nombre, imagen, precio, agregar }) {
-  // Formateador de precios en pesos chilenos
   const precioFormateado = new Intl.NumberFormat('es-CL', {
     style: 'currency',
     currency: 'CLP',

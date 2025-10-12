@@ -15,12 +15,12 @@ function Login({ setUsuario }) {
     );
 
     if (usuarioValido) {
-      toast.success(`✅ Bienvenido ${usuarioValido.nombre}`);
-      setUsuario(usuarioValido); // Opcional: guardar en App.jsx
+      toast.success(`Bienvenido ${usuarioValido.nombre}`);
+      setUsuario(usuarioValido);
       setEmail('');
       setPassword('');
     } else {
-      toast.error('❌ Email o contraseña incorrectos');
+      toast.error('Email o contraseña incorrectos');
     }
   };
 

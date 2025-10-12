@@ -9,9 +9,6 @@ import Producto from './pages/Producto';
 import Carrito from './pages/Carrito';
 import Registro from './pages/Registro';
 import Login from './pages/Login';
-import Nosotros from './pages/Nosotros';
-import Blogs from './pages/Blogs';
-import Contacto from './pages/Contacto';
 
 // Layout
 import Layout from './layouts/Layout';
@@ -28,12 +25,12 @@ function App() {
     { nombre: "Mazda 787B", imagen: "/img/mazda_787b.jpg", precio: 7000 },
   ];
 
-  // 🛒 Carrito persistente
+  // Carrito persistente
   const [carrito, setCarrito] = useState(() => {
     return JSON.parse(localStorage.getItem('carrito')) || [];
   });
 
-  // 🌟 Usuario logueado persistente
+  //  Usuario logueado persistente
   const [usuario, setUsuario] = useState(() => {
     return JSON.parse(localStorage.getItem('usuario')) || null;
   });
@@ -50,14 +47,14 @@ function App() {
 
   const agregarAlCarrito = (nombre, precio) => {
     setCarrito([...carrito, { id: Date.now(), nombre, precio }]);
-    toast.success(`✅ ${nombre} agregado al carrito`);
+    toast.success(`${nombre} agregado al carrito`);
   };
 
   const Inicio = () => (
     <main>
       <section id="bienvenida">
         <h2>Bienvenido a la Tienda Oficial Hot Wheels</h2>
-        {usuario && <p>🌟 Hola, {usuario.nombre}</p>}
+        {usuario && <p>{usuario.nombre}</p>}
       </section>
       <section id="productos">
         <h2>Modelos Destacados</h2>
@@ -87,9 +84,6 @@ function App() {
           <Route path="/" element={<Inicio />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="/login" element={<Login setUsuario={setUsuario} />} />
-          <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/contacto" element={<Contacto />} />
           <Route path="/carrito" element={<CarritoPage />} />
         </Route>
       </Routes>
@@ -101,5 +95,3 @@ function App() {
 }
 
 export default App;
-
-

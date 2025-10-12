@@ -1,38 +1,37 @@
 import { Link, Outlet } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import '../App.scss';
 
 function Layout({ carrito, usuario, setUsuario }) {
 
   const cerrarSesion = () => {
     setUsuario(null);
-    toast.info('👋 Sesión cerrada');
+    toast.info('Sesión cerrada');
   };
 
   return (
     <div>
       <header>
         <h1>Hot Wheels Store</h1>
-        <nav>
-          <ul>
-            <li><Link to="/">Inicio</Link></li>
-            <li><Link to="/">Productos</Link></li>
-            <li><Link to="/nosotros">Nosotros</Link></li>
-            <li><Link to="/blogs">Blogs</Link></li>
-            <li><Link to="/contacto">Contacto</Link></li>
-            <li><Link to="/carrito">Carrito ({carrito.length})</Link></li>
-
+        <nav className="navbar">
+          <div className="nav-left">
+            <Link to="/">Inicio</Link>
+            <Link to="/">Productos</Link>
             {usuario ? (
-              <li className="usuario-info">
-                <span>🌟 {usuario.nombre}</span>
+              <div className="usuario-info">
+                <span>{usuario.nombre}</span>
                 <button className="btn-cerrar" onClick={cerrarSesion}>Cerrar sesión</button>
-              </li>
+              </div>
             ) : (
               <>
-                <li><Link to="/login">Login</Link></li>
-                <li><Link to="/registro">Registro</Link></li>
+                <Link to="/login">Login</Link>
+                <Link to="/registro">Registro</Link>
               </>
             )}
-          </ul>
+          </div>
+          <div className="nav-right">
+            <Link to="/carrito">Carrito ({carrito.length})</Link>
+          </div>
         </nav>
       </header>
 

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +8,7 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
+/* BODY */
 body {
   background: #f5f5f5;
   color: #333;
@@ -16,8 +18,9 @@ body {
   min-height: 100vh;
 }
 
+/* HEADER */
 header {
-  background: linear-gradient(90deg, #ff0000, #ff0000);
+  background: #ff0000;
   color: white;
   padding: 0.6rem 2rem;
   text-align: center;
@@ -29,14 +32,15 @@ header {
 
 header h1 {
   margin-bottom: 1rem;
-  font-size: 3rem;
+  font-size: clamp(2.2rem, 5vw, 3rem);
   letter-spacing: 5px;
   font-family: 'Bangers', cursive;
-  color: #ffffff;
+  color: #fff;
   text-shadow: 2px 2px 0 #000, 4px 4px 0 #000;
   transform: skew(-5deg);
 }
 
+/* NAVIGATION */
 nav ul {
   list-style: none;
   text-align: center;
@@ -51,8 +55,8 @@ nav ul li a {
   color: #000;
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.3s;
-  padding: 2px 4px;
+  transition: color 0.3s, background 0.3s;
+  padding: 2px 6px;
   border-radius: 6px;
 }
 
@@ -61,6 +65,7 @@ nav ul li a:hover {
   background: #bb0000;
 }
 
+/* MAIN CONTENT */
 main {
   flex: 1;
   padding: 20px;
@@ -72,19 +77,17 @@ main {
 main h2 {
   margin-bottom: 25px;
   color: #000;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
 }
 
-#p_categoria,
-#p_stock,
-p,
-#p {
+.p-text {
   color: #000;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 2vw, 2rem);
   margin: 2.5px 0 5px 0;
 }
 
-h3, #h3, #h3_pro {
+/* HEADERS H3 */
+h3, .h3-custom, .h3-pro {
   text-align: center;
   font-family: "Segoe UI", Arial, sans-serif;
   color: #000;
@@ -93,9 +96,10 @@ h3, #h3, #h3_pro {
 }
 
 h3 { font-size: 1.5rem; margin: 0.5rem 0; }
-#h3 { font-size: 25px; margin: 0.8rem 0 0.6rem 0; }
-#h3_pro { font-size: 14px; margin: 0.8rem 0 0.6rem 0; }
+.h3-custom { font-size: 25px; margin: 0.8rem 0 0.6rem 0; }
+.h3-pro { font-size: 14px; margin: 0.8rem 0 0.6rem 0; }
 
+/* PRODUCT CARDS */
 .productos-container {
   display: flex;
   flex-wrap: wrap;
@@ -137,6 +141,7 @@ h3 { font-size: 1.5rem; margin: 0.5rem 0; }
   margin: 10px 0;
 }
 
+/* BUTTONS IN CARDS */
 .card button {
   background: #ff0000;
   color: #fff;
@@ -153,6 +158,7 @@ h3 { font-size: 1.5rem; margin: 0.5rem 0; }
   background: #b80000;
 }
 
+/* FORM STYLES */
 form {
   display: flex;
   flex-direction: column;
@@ -203,6 +209,7 @@ form button:hover {
   transform: scale(1.05);
 }
 
+/* CARRITO */
 .item-carrito {
   background: #fff;
   margin: 10px auto;
@@ -247,6 +254,36 @@ form button:hover {
   text-align: center;
 }
 
+/* BOTON COMPRAR MEJORADO */
+.comprar-btn {
+  background: linear-gradient(45deg, #ff0000, #ff4040);
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(255, 0, 0, 0.4);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  animation: brillo 2s infinite alternate;
+}
+
+.comprar-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(255, 64, 64, 0.6);
+  background: linear-gradient(45deg, #ff4040, #ff0000);
+}
+
+/* CORRECCIÓN DE RGBA EN ANIMACIÓN */
+@keyframes brillo {
+  0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.6); }
+  100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); }
+}
+
+/* ADMIN */
 .admin-container {
   display: flex;
   min-height: 100vh;
@@ -291,6 +328,7 @@ form button:hover {
   background: #f5f5f5;
 }
 
+/* FOOTER */
 footer {
   text-align: center;
   background: #222;
@@ -299,6 +337,70 @@ footer {
   margin-top: auto;
 }
 
+/* NAVBAR USUARIO */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-left a, .nav-right a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.nav-left a:hover, .nav-right a:hover {
+  background-color: #bb0000;
+}
+
+/* INFO USUARIO */
+.usuario-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.usuario-info span {
+  font-weight: bold;
+  color: #fff;
+  font-size: 1rem;
+  padding: 4px 8px;
+  background-color: #ff0000;
+  border-radius: 6px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.usuario-info .btn-cerrar {
+  background-color: #fff;
+  color: #ff0000;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.usuario-info .btn-cerrar:hover {
+  background-color: #ff4040;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* MEDIA QUERIES */
 @media (max-width: 768px) {
   nav ul {
     display: flex;
@@ -343,42 +445,10 @@ footer {
     width: 95%;
   }
 
-  #h3 {
+  .h3-custom {
     font-size: 1.2rem;
     margin: 0.2rem 0;
   }
 }
-.usuario-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-left: auto; /* Empuja todo al final del navbar */
-}
 
-.usuario-info span {
-  font-weight: bold;
-  color: #fff;
-  font-size: 1rem;
-  padding: 4px 8px;
-  background-color: #ff0000; /* rojo Hot Wheels */
-  border-radius: 6px;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-}
 
-.usuario-info .btn-cerrar {
-  background-color: #fff;
-  color: #ff0000;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.usuario-info .btn-cerrar:hover {
-  background-color: #ff4040;
-  color: #fff;
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}

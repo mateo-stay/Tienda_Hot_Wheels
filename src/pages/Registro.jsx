@@ -10,7 +10,7 @@ function Registro() {
     e.preventDefault();
 
     if (!nombre || !email || !password) {
-      toast.error('⚠️ Todos los campos son obligatorios');
+      toast.error('Todos los campos son obligatorios');
       return;
     }
 
@@ -20,7 +20,7 @@ function Registro() {
     // Verificar si el email ya existe
     const existe = usuarios.find((u) => u.email === email);
     if (existe) {
-      toast.error('❌ Este correo ya está registrado');
+      toast.error('Este correo ya está registrado');
       return;
     }
 
@@ -29,7 +29,7 @@ function Registro() {
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
 
     // Mensaje de éxito
-    toast.success('✅ Registro exitoso');
+    toast.success('Registro exitoso');
 
     // Limpiar formulario
     setNombre('');
